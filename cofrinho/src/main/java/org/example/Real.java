@@ -7,7 +7,7 @@ public class Real extends Moeda {
 
   @Override
   public void info() {
-    System.out.println("Real: " + valor);
+    System.out.println("R$ " + valor);
   }
 
   @Override

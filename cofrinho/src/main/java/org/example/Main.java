@@ -9,7 +9,7 @@ public class Main {
     System.out.println("2 - Remover Moeda");
     System.out.println("3 - Listar Moedas");
     System.out.println("4 - Calcular total em real");
-    System.out.println("5 - Sair");
+    System.out.println("0 - Sair");
   }
 
   public static void exibirMenuAdicionar() {
@@ -17,16 +17,16 @@ public class Main {
     System.out.println("1 - Real");
     System.out.println("2 - Euro");
     System.out.println("3 - Dolar");
-    System.out.println("4 - Voltar");
+    System.out.println("0 - Voltar");
   }
 
   public static void adicionar(Scanner scanner, Cofrinho cofrinho) {
     exibirMenuAdicionar();
 
     System.out.print("Qual moeda deseja adicionar? ");
-    var opcaoAdicionar = scanner.next();
+    var opcaoAdicionar = scanner.nextInt();
 
-    if (opcaoAdicionar.equals("4")) {
+    if (opcaoAdicionar == 0) {
       return;
     }
 
@@ -34,15 +34,15 @@ public class Main {
     var valorMoeda = scanner.nextDouble();
 
     switch (opcaoAdicionar) {
-      case "1":
+      case 1:
         cofrinho.adicionar(new Real(valorMoeda));
         System.out.println("Moeda adicionada com sucesso!");
         break;
-      case "2":
+      case 2:
         cofrinho.adicionar(new Euro(valorMoeda));
         System.out.println("Moeda adicionada com sucesso!");
         break;
-      case "3":
+      case 3:
         cofrinho.adicionar(new Dolar(valorMoeda));
         System.out.println("Moeda adicionada com sucesso!");
         break;
@@ -62,33 +62,14 @@ public class Main {
     exibirMenuRemover();
     cofrinho.listagemMoedas();
     System.out.print("Indice: ");
-    var opcaoRemover = scanner.next();
+    var opcaoRemover = scanner.nextInt();
 
-    if (opcaoRemover.equals("4")) {
+    if (opcaoRemover == 0) {
       return;
     }
 
-    System.out.print("Digite o valor da moeda: ");
-    var valorMoeda = scanner.nextDouble();
-
-    switch (opcaoRemover) {
-      case "1":
-        cofrinho.remover(new Real(valorMoeda));
-        System.out.println("Moeda removida com sucesso!");
-        break;
-      case "2":
-        cofrinho.remover(new Euro(valorMoeda));
-        System.out.println("Moeda removida com sucesso!");
-        break;
-      case "3":
-        cofrinho.remover(new Dolar(valorMoeda));
-        System.out.println("Moeda removida com sucesso!");
-        break;
-      default:
-        System.out.println("Opção inválida");
-        remover(scanner, cofrinho);
-        break;
-    }
+    cofrinho.remover(opcaoRemover);
+    System.out.println("Moeda removida com sucesso!");
   }
 
   public static void main(String[] args) {
@@ -97,21 +78,23 @@ public class Main {
 
       exibirMenu();
       System.out.print("Escolha uma opção: ");
-      var opcao = scanner.next();
+      var opcao = scanner.nextInt();
 
-      while (!opcao.equals("5")) {
+      while (opcao != 0) {
         switch (opcao) {
-          case "1":
+          case 1:
             adicionar(scanner, cofrinho);
             break;
-          case "2":
+          case 2:
             remover(scanner, cofrinho);
             break;
-          case "3":
+          case 3:
+            System.out.println("Cofrinho: ");
             cofrinho.listagemMoedas();
             break;
-          case "4":
-            System.out.println("Total em real: " + cofrinho.totalConvertido());
+          case 4:
+            System.out.println("Total em real: ");
+            System.out.println("R$ " + cofrinho.totalConvertido());
             break;
           default:
             System.out.println("Opção inválida");
@@ -120,7 +103,7 @@ public class Main {
 
         exibirMenu();
         System.out.print("Escolha uma opção: ");
-        opcao = scanner.next();
+        opcao = scanner.nextInt();
       }
 
       System.out.println("Saindo...");

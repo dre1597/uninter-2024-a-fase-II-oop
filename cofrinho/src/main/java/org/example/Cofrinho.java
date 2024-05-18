@@ -6,15 +6,19 @@ public class Cofrinho {
   private ArrayList<Moeda> listaMoedas;
 
   public Cofrinho() {
-    listaMoedas = new ArrayList<Moeda>();
+    listaMoedas = new ArrayList<>();
   }
 
   public void adicionar(Moeda moeda) {
     listaMoedas.add(moeda);
   }
 
-  public void remover(Moeda moeda) {
-    listaMoedas.remove(moeda);
+  public void remover(int indice) {
+    try {
+      listaMoedas.remove(indice - 1);
+    } catch (IndexOutOfBoundsException e) {
+      System.out.println("Opção inválida");
+    }
   }
 
   public void listagemMoedas() {
